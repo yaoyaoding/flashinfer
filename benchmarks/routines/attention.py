@@ -526,7 +526,7 @@ def testBatchDecodeWithPagedKVCacheWrapper(args):
                 workspace_buffer=workspace_buffer,
                 block_tables=block_tables,
                 seq_lens=actual_seq_lens_kv,
-                max_seq_len=s_kv,
+                max_kv_len=s_kv,
                 bmm1_scale=scale if k_scale is None else k_scale * scale,
                 bmm2_scale=1.0 if v_scale is None else v_scale,
             )
