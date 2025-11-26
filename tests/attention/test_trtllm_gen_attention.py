@@ -895,7 +895,7 @@ def _test_trtllm_batch_decode(
             kv_indptr=kv_indptr_tokens,
         )
 
-    if q_len_per_req > 1:
+    if (q_len_per_req and q_len_per_req > 1):
         mask = generate_causal_mask(batch_size, q_len_per_req, GPU_DEVICE)
     else:
         mask = None
@@ -1502,38 +1502,37 @@ if __name__ == "__main__":
         max_in_kv_len=110,
         head_dim=128,
     )
-    # _test_trtllm_batch_decode(
-    #     backend='trtllm-gen',
-    #     kv_layout="HND",
-    #     batch_size=4,
-    #     q_len_per_req=3,
-    #     page_size=64,
-    #     num_kv_heads=4,
-    #     head_grp_size=1,
-    #     window_left=-1,
-    #     q_dtype="bf16",
-    #     kv_dtype="bf16",
-    #     o_dtype="bf16",
-    #     enable_pdl=None,
-    #     enable_sink=False,
-    #     max_in_kv_len=110,
-    #     head_dim=128,
-    # )
-
-    # _test_trtllm_batch_decode(
-    #     backend='trtllm-gen',
-    #     kv_layout="HND",
-    #     batch_size=4,
-    #     q_len_per_req=1,
-    #     page_size=64,
-    #     num_kv_heads=4,
-    #     head_grp_size=1,
-    #     window_left=-1,
-    #     q_dtype="fp8",
-    #     kv_dtype="fp8",
-    #     o_dtype="nvfp4",
-    #     enable_pdl=None,
-    #     enable_sink=False,
-    #     max_in_kv_len=110,
-    #     head_dim=128,
-    # )
+    _test_trtllm_batch_decode(
+        backend='trtllm-gen',
+        kv_layout="HND",
+        batch_size=4,
+        q_len_per_req=3,
+        page_size=64,
+        num_kv_heads=4,
+        head_grp_size=1,
+        window_left=-1,
+        q_dtype="bf16",
+        kv_dtype="bf16",
+        o_dtype="bf16",
+        enable_pdl=None,
+        enable_sink=False,
+        max_in_kv_len=110,
+        head_dim=128,
+    )
+    _test_trtllm_batch_decode(
+        backend='trtllm-gen',
+        kv_layout="HND",
+        batch_size=4,
+        q_len_per_req=1,
+        page_size=64,
+        num_kv_heads=4,
+        head_grp_size=1,
+        window_left=-1,
+        q_dtype="fp8",
+        kv_dtype="fp8",
+        o_dtype="nvfp4",
+        enable_pdl=None,
+        enable_sink=False,
+        max_in_kv_len=110,
+        head_dim=128,
+    )
