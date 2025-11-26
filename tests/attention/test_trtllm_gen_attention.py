@@ -1434,3 +1434,7 @@ def test_trtllm_gen_prefill_deepseek_bs1(
     test_trtllm_gen_prefill_deepseek(
         batch_size, s_qo, s_kv, num_kv_heads, head_grp_size, causal
     )
+
+
+if __name__ == "__main__":
+    pytest.main([__file__])
